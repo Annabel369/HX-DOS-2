@@ -1,6 +1,6 @@
 # Projeto HX-DOS-2 🚀
 
-Bem-vindo ao projeto **HX-DOS-2**! Este repositório é o núcleo de uma ideia insanamente ambiciosa: **construir um Sistema Operacional bootável baseado em DOS, capaz de rodar jogos complexos nativos de Windows XP (como *Grand Theft Auto: Vice City* ou *Need for Speed*), utilizando aceleração 3D por Software e Wrappers de API nativos, direto pelo terminal!**
+Bem-vindo ao projeto **HX-DOS-2**! Este repositório é o núcleo de uma ideia insanamente ambiciosa: **construir um ecossistema bootável baseado no robusto MS-DOS 7.10, perfeitamente compatível com 16-bits e 32-bits.** A grande sacada aqui é a evolução e a compatibilidade: **somos capazes de rodar jogos complexos nativos de Windows XP (como *Grand Theft Auto: Vice City* ou *Need for Speed*), utilizando aceleração 3D por Software e Wrappers de API nativos, direto pelo terminal!**
 
 Esqueça o Windows bugado, drivers piratas e chaves de registro. Aqui nós controlamos o hardware!
 
@@ -15,7 +15,7 @@ Por que o MS-DOS 7.10?
 - Gerenciamento agressivo de memória em Modo Real/Irreal (Unreal Mode).
 
 ## 🎯 O Que é o "HX-DOS-2"?
-O projeto **HX-DOS-2** atua fornecendo suas próprias DLLs (Wrappers) e extensões de sistema (Totalmente originais, sem depender de emuladores) para implementar e fornecer suporte às APIs do Windows 2000/XP diretamente no MS-DOS puro.
+O projeto **HX-DOS-2** atua fornecendo suas próprias DLLs (Wrappers) e extensões de sistema (Totalmente originais, sem depender de emuladores) para implementar e fornecer suporte às APIs do Windows 2000/XP diretamente sobre a fundação bootável do MS-DOS 7.10, unindo perfeitamente as arquiteturas de 16-bits e 32-bits.
 
 Quando um jogo pede para renderizar um modelo 3D, ele chama a `d3d8.dll` achando que está falando com a Microsoft. A nossa `d3d8.dll` intercepta os polígonos, converte a matemática e envia as requisições de renderização direto para a nossa **Engine VESA Assembly de Baixo Nível (cube3d.asm)**!
 
