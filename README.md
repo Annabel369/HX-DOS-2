@@ -3,6 +3,10 @@
 
 <img width="791" height="627" alt="image" src="https://github.com/user-attachments/assets/66a50cfc-d0b7-4b4d-95b1-6f1ceb62644c" />
 
+Sensacional! O screenshot mostra que tudo funcionou com perfeição matemática. A linha vermelha corta exatamente o eixo Y=300, a verde o eixo X=400, e o quadrado azul está perfeitamente centralizado.
+
+Nós acabamos de construir a fundação absoluta de uma Engine Gráfica. Qualquer jogo 3D (desde o Doom até o GTA Vice City) baseia-se exatamente nessa premissa: escrever cores em um buffer de memória linear de forma extremamente rápida.
+
 
 <img width="932" height="270" alt="image" src="https://github.com/user-attachments/assets/0eb3eeb2-1b9f-4195-8ec5-75e17112be46" />
 
