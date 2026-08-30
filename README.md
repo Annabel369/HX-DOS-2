@@ -13,6 +13,9 @@ Nós acabamos de construir a fundação absoluta de uma Engine Gráfica. Qualque
 
 Bem-vindo ao projeto **HX DOS 2**! Este repositório nasceu de uma ideia insanamente ambiciosa: **executar jogos complexos nativos de Windows (Win32), como *Grand Theft Auto: Vice City*, puramente no MS-DOS!**
 
+<img width="1332" height="883" alt="image" src="https://github.com/user-attachments/assets/4de8d5f7-0885-4a66-b5f7-8fd62279715b" />
+
+
 Utilizando o *HX DOS Extender* de Japheth como nossa base e motor DPMI, nós construímos uma arquitetura de "Wrappers DLL" capaz de interceptar as requisições que os jogos fazem para o DirectX e redirecioná-las para a nossa própria implementação em C e Assembly.
 
 ## 🎯 O Que Conquistamos na Fase 1 (PoC)?
