@@ -5,9 +5,9 @@ ECHO Inicializando DOS-WINE para Need For Speed Underground 2...
 REM Configurar o PATH para o HX DOS Extender
 SET PATH=C:\HXRT\BIN;%PATH%
 
-REM Ir para a pasta do jogo (montada no drive D pelo DOSBox)
+REM Montar a pasta do jogo como drive D: automaticamente
+MOUNT D "/media/astral/DOS71/drive_c/Program Files (x86)/EA GAMES/Need for Speed Underground 2"
 D:
-
 REM Copiar nossas DLLs tradutoras para a pasta do jogo (para ter certeza que serão carregadas)
 COPY C:\d3d9.dll .
 COPY C:\netapi32.dll .

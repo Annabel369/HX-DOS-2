@@ -11,4 +11,4 @@ i686-w64-mingw32-gcc -shared -nostdlib -o shfolder.dll shfolder.c shfolder.def -
 echo "Compilando tapi32.dll..."
 i686-w64-mingw32-gcc -shared -nostdlib -o tapi32.dll tapi32.c tapi32.def -lkernel32 -Wl,--entry=_DllMain@12
 
-echo "Concluído!"
+echo "Concluído! As DLLs foram salvas na pasta atual."

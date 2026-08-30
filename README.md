@@ -1,16 +1,16 @@
-# Project HX-DOS-2 🚀
+# Welcome to the HX-DOS-2 project! 🚀
 
-Welcome to the **HX-DOS-2** project! This repository is the core of an insanely ambitious idea: **building a bootable ecosystem based on the robust MS-DOS 7.10, perfectly compatible with both 16-bit and 32-bit architectures.** The big catch here is evolution and compatibility: **we are capable of running complex native Windows XP games (like *Grand Theft Auto: Vice City* or *Need for Speed*), utilizing Software 3D acceleration and native API Wrappers, directly from the terminal!**
+This repository is the core of an insanely ambitious idea: building a bootable ecosystem based on the robust MS-DOS 7.10, perfectly compatible with both 16-bit and 32-bit architectures. 
 
-Forget buggy Windows, pirated drivers, and registry keys. Here we control the hardware!
+The big catch here is evolution and compatibility: we are capable of running complex native Windows XP games (like Grand Theft Auto: Vice City or Need for Speed), utilizing Software 3D acceleration and native API Wrappers, directly from the terminal!
 
-## 👑 The Absolute Foundation: MS-DOS 7.10 (China DOS Union)
-**IMPORTANT TECHNICAL WARNING FOR ALL DEVELOPERS:**
-Under no circumstances should you confuse the foundation of this project! We are **NOT** running on a purist DOSBox or DOS 6.22! 
-All the code in this repository was built, tested, and validated on top of the legendary **MS-DOS 7.10 extracted from Windows 98 SE by the China DOS Union (CDU)**. 
+## 👑 The Foundation: MS-DOS 7.10 (China DOS Union)
+**IMPORTANT TECHNICAL NOTICE:**
+Under no circumstances confuse the foundation of this project! We are **NOT** running on purist DOSBox or DOS 6.22! 
+All code in this repository was built, tested, and validated on top of the legendary **MS-DOS 7.10 extracted from Windows 98 SE by the China DOS Union (CDU)**. 
 
 Why MS-DOS 7.10?
-- Native and perfect support for **FAT32** and LBA (necessary for the 2GB+ of GTA VC assets).
+- Native and flawless support for **FAT32** and LBA (necessary for the 2GB+ assets of GTA VC and NFS).
 - Native support for **LFN (Long File Names)**, preventing Windows game folders from corrupting.
 - Aggressive memory management in Real/Unreal Mode.
 
@@ -23,8 +23,8 @@ When a game asks to render a 3D model, it calls `d3d8.dll` thinking it's talking
 
 ### 1. C Wrappers (Fake Windows DLLs)
 * `d3d8.c` / `d3d8.dll`: Our custom interceptor version of Direct3D 8. It contains the C++ COM VTable structures simulated in pure C. Redirects rendering calls to VESA.
-* `d3d9.c` / `d3d9.dll`: Our Direct3D 9 Wrapper. Intercepts more recent rendering calls.
-* `dinput8.c` / `dinput8.dll`: Our DirectInput 8 Wrapper. Simulates "ghost" mice and keyboards by injecting zeros into the game buffer to avoid *Page Faults* in the absence of Windows drivers.
+* `d3d9.c` / `d3d9.dll`: Our Direct3D 9 Wrapper. Currently features a massive **120-slot Call Tracker Spy Network**. All unmapped D3D9 functions log their Slot ID directly to `hx_d3d9.log` so we can dynamically reverse-engineer the game's rendering engine on the fly.
+* `dinput8.c` / `dinput8.dll`: Our DirectInput 8 Wrapper. **Features a Bare-Metal Hardware Mapping**: By executing Inline Assembly (`inb $0x60`), this wrapper bypasses all OS layers and maps the physical keyboard controller on the motherboard. This flawlessly pipes the MS-DOS keyboard (like the ESC key) straight into the Windows DirectInput buffer!
 * `netapi32.c` / `netapi32.dll`: Network API wrapper, simulating network function returns.
 * `tapi32.c` / `tapi32.dll`: Telephony API (TAPI) wrapper, generating simulated returns (S_OK) for stability.
 * `shfolder.c` / `shfolder.dll`: Shell Folder API wrapper, useful for games (like Need for Speed) that request standard directories (e.g., "My Documents").

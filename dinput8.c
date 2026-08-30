@@ -69,15 +69,19 @@ HRESULT STDMETHODCALLTYPE DIDevice_SetCooperativeLevel(void* This, HWND hwnd, DW
 }
 
 HRESULT STDMETHODCALLTYPE DIDevice_GetDeviceState(void* This, DWORD cbData, void* lpvData) {
-    // WriteLog("[DInput8 Device] GetDeviceState (lendo botoes...)\r\n");
-    
-    // A MAGICA: Limpamos o buffer dizendo que NENHUMA TECLA ou BOTAO esta pressionado
-    if (lpvData != NULL && cbData > 0) {
-        // Preenche de zeros
+    if (lpvData != NULL && cbData == 256) {
         char* buf = (char*)lpvData;
         DWORD i;
         for (i = 0; i < cbData; i++) {
             buf[i] = 0;
+        }
+        
+        // Leitura bruta da Porta de Hardware (0x60) do MS-DOS!
+        unsigned char scancode;
+        asm volatile("inb $0x60, %0" : "=a"(scancode));
+        
+        if (scancode < 128) {
+            buf[scancode] = 0x80; // DInput exige o bit mais significativo setado (0x80)
         }
     }
     return DI_OK;
