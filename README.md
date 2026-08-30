@@ -23,7 +23,11 @@ Quando um jogo pede para renderizar um modelo 3D, ele chama a `d3d8.dll` achando
 
 ### 1. Wrappers em C (As DLLs Falsas do Windows)
 * `d3d8.c` / `d3d8.dll`: A nossa versão customizada e interceptadora do Direct3D 8. Contém as estruturas VTable do COM C++ simuladas em C puro. Redireciona chamadas de renderização para a VESA.
+* `d3d9.c` / `d3d9.dll`: O nosso Wrapper do Direct3D 9. Intercepta chamadas de renderização mais recentes.
 * `dinput8.c` / `dinput8.dll`: O nosso Wrapper do DirectInput 8. Simula mouses e teclados "fantasmas" injetando zeros no buffer dos jogos para evitar *Page Faults* na ausência de drivers de Windows.
+* `netapi32.c` / `netapi32.dll`: Wrapper da Network API, simulando retornos de funções de rede.
+* `tapi32.c` / `tapi32.dll`: Wrapper da Telephony API (TAPI), gerando retornos simulados (S_OK) para estabilidade.
+* `shfolder.c` / `shfolder.dll`: Wrapper do Shell Folder API, útil para jogos (como Need for Speed) que requisitam diretórios padrão (ex: "Meus Documentos").
 * `test_d3d.c`: Um aplicativo de teste Win32 nativo para validar as chamadas COM da nossa DLL dentro do DOS usando `DPMILD32.EXE`.
 
 ### 2. A Engine Gráfica Nativa (Assembly x86)
@@ -46,6 +50,13 @@ nasm -f elf32 vesa_engine.asm -o vesa_engine.o
 i686-w64-mingw32-gcc -shared -nostdlib -o d3d8.dll d3d8.c vesa_engine.o d3d8.def -lkernel32 -Wl,--entry=_DllMain@12
 i686-w64-mingw32-gcc -shared -nostdlib -o dinput8.dll dinput8.c dinput8.def -lkernel32 -Wl,--entry=_DllMain@12
 ```
+
+**Para as DLLs do Need For Speed (NFS):**
+Você pode rodar o nosso script automatizado:
+```bash
+./compila_nfs.sh
+```
+Isso vai gerar e organizar as DLLs essenciais (`d3d9`, `tapi32`, `netapi32`, `shfolder`) para que o jogo rode de forma fluída, e você pode disparar usando o `RUN_NFS.BAT`.
 
 ## 🚀 Próximos Passos na Estrada de Tijolos Amarelos
 1. **Fundir as Duas Metades**: Lincar os comandos `DrawPrimitive` capturados pelo `d3d8.c` com a Engine de rastreio de polígonos e Bresenham do `cube3d.asm`.
