@@ -1,5 +1,9 @@
 # Projeto HX DOS 2 🚀 MS-DOS 7.10
 
+
+<img width="791" height="627" alt="image" src="https://github.com/user-attachments/assets/66a50cfc-d0b7-4b4d-95b1-6f1ceb62644c" />
+
+
 <img width="932" height="270" alt="image" src="https://github.com/user-attachments/assets/0eb3eeb2-1b9f-4195-8ec5-75e17112be46" />
 
 
