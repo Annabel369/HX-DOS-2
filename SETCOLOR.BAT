@@ -1,0 +1,2 @@
+SET COLOR=0A
+SET PROMPT=$e[0;1;40;32m$p$g

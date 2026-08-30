@@ -1,0 +1,6 @@
+
+DPMI loader v3.12
+Copyright 1993-2024 Japheth
+
+DPMILD32: Module=SPEED2.EXE
+DPMILD32: File not found error

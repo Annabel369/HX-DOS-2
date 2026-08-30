@@ -71,3 +71,4 @@ Bem-vindo ao projeto **HX DOS 2**! Este repositório nasceu de uma ideia insanam
 
 ---
 *MS-DOS 8: Onde os jogos clássicos do Windows vão para renascer nas raízes da computação!*
+

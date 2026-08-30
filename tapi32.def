@@ -1,0 +1,10 @@
+EXPORTS
+lineAnswer
+lineMakeCall
+lineGetID
+lineClose
+lineNegotiateAPIVersion
+lineOpen
+lineGetDevCaps
+lineInitialize
+lineShutdown
