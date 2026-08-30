@@ -1,76 +1,76 @@
-# Projeto HX-DOS-2 🚀
+# Project HX-DOS-2 🚀
 
-Bem-vindo ao projeto **HX-DOS-2**! Este repositório é o núcleo de uma ideia insanamente ambiciosa: **construir um ecossistema bootável baseado no robusto MS-DOS 7.10, perfeitamente compatível com 16-bits e 32-bits.** A grande sacada aqui é a evolução e a compatibilidade: **somos capazes de rodar jogos complexos nativos de Windows XP (como *Grand Theft Auto: Vice City* ou *Need for Speed*), utilizando aceleração 3D por Software e Wrappers de API nativos, direto pelo terminal!**
+Welcome to the **HX-DOS-2** project! This repository is the core of an insanely ambitious idea: **building a bootable ecosystem based on the robust MS-DOS 7.10, perfectly compatible with both 16-bit and 32-bit architectures.** The big catch here is evolution and compatibility: **we are capable of running complex native Windows XP games (like *Grand Theft Auto: Vice City* or *Need for Speed*), utilizing Software 3D acceleration and native API Wrappers, directly from the terminal!**
 
-Esqueça o Windows bugado, drivers piratas e chaves de registro. Aqui nós controlamos o hardware!
+Forget buggy Windows, pirated drivers, and registry keys. Here we control the hardware!
 
-## 👑 A Base Absoluta: MS-DOS 7.10 (China DOS Union)
-**AVISO TÉCNICO IMPORTANTE PARA TODOS OS DESENVOLVEDORES:**
-Sob nenhuma hipótese confundam a fundação deste projeto! Nós **NÃO** estamos rodando no DOSBox purista ou no DOS 6.22! 
-Todo o código deste repositório foi construído, testado e validado em cima do lendário **MS-DOS 7.10 extraído do Windows 98 SE pela China DOS Union (CDU)**. 
+## 👑 The Absolute Foundation: MS-DOS 7.10 (China DOS Union)
+**IMPORTANT TECHNICAL WARNING FOR ALL DEVELOPERS:**
+Under no circumstances should you confuse the foundation of this project! We are **NOT** running on a purist DOSBox or DOS 6.22! 
+All the code in this repository was built, tested, and validated on top of the legendary **MS-DOS 7.10 extracted from Windows 98 SE by the China DOS Union (CDU)**. 
 
-Por que o MS-DOS 7.10?
-- Suporte nativo e perfeito a **FAT32** e LBA (necessário para os 2GB+ de assets do GTA VC).
-- Suporte nativo a **LFN (Long File Names)**, impedindo que as pastas dos jogos de Windows se corrompam.
-- Gerenciamento agressivo de memória em Modo Real/Irreal (Unreal Mode).
+Why MS-DOS 7.10?
+- Native and perfect support for **FAT32** and LBA (necessary for the 2GB+ of GTA VC assets).
+- Native support for **LFN (Long File Names)**, preventing Windows game folders from corrupting.
+- Aggressive memory management in Real/Unreal Mode.
 
-## 🎯 O Que é o "HX-DOS-2"?
-O projeto **HX-DOS-2** atua fornecendo suas próprias DLLs (Wrappers) e extensões de sistema (Totalmente originais, sem depender de emuladores) para implementar e fornecer suporte às APIs do Windows 2000/XP diretamente sobre a fundação bootável do MS-DOS 7.10, unindo perfeitamente as arquiteturas de 16-bits e 32-bits.
+## 🎯 What is "HX-DOS-2"?
+The **HX-DOS-2** project works by providing its own DLLs (Wrappers) and system extensions (completely original, without relying on emulators) to implement and provide support for Windows 2000/XP APIs directly on top of the bootable foundation of MS-DOS 7.10, perfectly uniting the 16-bit and 32-bit architectures.
 
-Quando um jogo pede para renderizar um modelo 3D, ele chama a `d3d8.dll` achando que está falando com a Microsoft. A nossa `d3d8.dll` intercepta os polígonos, converte a matemática e envia as requisições de renderização direto para a nossa **Engine VESA Assembly de Baixo Nível (cube3d.asm)**!
+When a game asks to render a 3D model, it calls `d3d8.dll` thinking it's talking to Microsoft. Our `d3d8.dll` intercepts the polygons, converts the math, and sends the rendering requests straight to our **Low-Level VESA Assembly Engine (cube3d.asm)**!
 
-## 📂 Estrutura Técnica do Repositório
+## 📂 Repository Technical Structure
 
-### 1. Wrappers em C (As DLLs Falsas do Windows)
-* `d3d8.c` / `d3d8.dll`: A nossa versão customizada e interceptadora do Direct3D 8. Contém as estruturas VTable do COM C++ simuladas em C puro. Redireciona chamadas de renderização para a VESA.
-* `d3d9.c` / `d3d9.dll`: O nosso Wrapper do Direct3D 9. Intercepta chamadas de renderização mais recentes.
-* `dinput8.c` / `dinput8.dll`: O nosso Wrapper do DirectInput 8. Simula mouses e teclados "fantasmas" injetando zeros no buffer dos jogos para evitar *Page Faults* na ausência de drivers de Windows.
-* `netapi32.c` / `netapi32.dll`: Wrapper da Network API, simulando retornos de funções de rede.
-* `tapi32.c` / `tapi32.dll`: Wrapper da Telephony API (TAPI), gerando retornos simulados (S_OK) para estabilidade.
-* `shfolder.c` / `shfolder.dll`: Wrapper do Shell Folder API, útil para jogos (como Need for Speed) que requisitam diretórios padrão (ex: "Meus Documentos").
-* `test_d3d.c`: Um aplicativo de teste Win32 nativo para validar as chamadas COM da nossa DLL dentro do DOS usando `DPMILD32.EXE`.
+### 1. C Wrappers (Fake Windows DLLs)
+* `d3d8.c` / `d3d8.dll`: Our custom interceptor version of Direct3D 8. It contains the C++ COM VTable structures simulated in pure C. Redirects rendering calls to VESA.
+* `d3d9.c` / `d3d9.dll`: Our Direct3D 9 Wrapper. Intercepts more recent rendering calls.
+* `dinput8.c` / `dinput8.dll`: Our DirectInput 8 Wrapper. Simulates "ghost" mice and keyboards by injecting zeros into the game buffer to avoid *Page Faults* in the absence of Windows drivers.
+* `netapi32.c` / `netapi32.dll`: Network API wrapper, simulating network function returns.
+* `tapi32.c` / `tapi32.dll`: Telephony API (TAPI) wrapper, generating simulated returns (S_OK) for stability.
+* `shfolder.c` / `shfolder.dll`: Shell Folder API wrapper, useful for games (like Need for Speed) that request standard directories (e.g., "My Documents").
+* `test_d3d.c`: A native Win32 test application to validate the COM calls of our DLL inside DOS using `DPMILD32.EXE`.
 
-### 2. A Engine Gráfica Nativa (Assembly x86)
-* `cube3d.asm` (**A Joia da Coroa**): Implementação definitiva de renderização 3D nativa e algoritmos matemáticos (como Bresenham) em Assembly.
-    - Utiliza **Unreal Mode 32-bits** para quebrar a barreira dos 64KB de memória do MS-DOS.
-    - **Segredo de Ouro**: A segmentação de memória linear (4GB Limit) é injetada no registrador `FS`, em vez do tradicional `ES`. Isso blinda a Engine contra crashes da BIOS e do DOSBox (`Illegal descriptor type 10`), garantindo estabilidade infinita.
-    - Acesso direto ao Linear Frame Buffer (LFB) da placa de vídeo via VESA BIOS Extension (Modo 0x114 LFB).
+### 2. The Native Graphics Engine (x86 Assembly)
+* `cube3d.asm` (**The Crown Jewel**): Definitive implementation of native 3D rendering and mathematical algorithms (like Bresenham) in Assembly.
+    - Uses **32-bit Unreal Mode** to break the 64KB memory barrier of MS-DOS.
+    - **Golden Secret**: Linear memory segmentation (4GB Limit) is injected into the `FS` register, instead of the traditional `ES`. This shields the Engine against BIOS and DOSBox crashes (`Illegal descriptor type 10`), ensuring infinite stability.
+    - Direct access to the Linear Frame Buffer (LFB) of the video card via VESA BIOS Extension (Mode 0x114 LFB).
 
-## 🛠️ Como Compilar o "HX-DOS-2"
+## 🛠️ How to Compile "HX-DOS-2"
 
-Nossas DLLs são compiladas utilizando o compilador C Win32 (MinGW) para manter compatibilidade absoluta de ABI (Application Binary Interface) com os jogos originais.
+Our DLLs are compiled using the Win32 C compiler (MinGW) to maintain absolute ABI (Application Binary Interface) compatibility with the original games.
 
-**Para a Engine VESA (Objeto C):**
+**For the VESA Engine (C Object):**
 ```bash
 nasm -f elf32 vesa_engine.asm -o vesa_engine.o
 ```
 
-**Para as DLLs Tradutoras (MinGW):**
+**For the Translator DLLs (MinGW):**
 ```bash
 i686-w64-mingw32-gcc -shared -nostdlib -o d3d8.dll d3d8.c vesa_engine.o d3d8.def -lkernel32 -Wl,--entry=_DllMain@12
 i686-w64-mingw32-gcc -shared -nostdlib -o dinput8.dll dinput8.c dinput8.def -lkernel32 -Wl,--entry=_DllMain@12
 ```
 
-**Para as DLLs do Need For Speed (NFS):**
-Você pode rodar o nosso script automatizado:
+**For Need For Speed (NFS) DLLs:**
+You can run our automated script:
 ```bash
 ./compila_nfs.sh
 ```
-Isso vai gerar e organizar as DLLs essenciais (`d3d9`, `tapi32`, `netapi32`, `shfolder`) para que o jogo rode de forma fluída, e você pode disparar usando o `RUN_NFS.BAT`.
+This will generate and organize the essential DLLs (`d3d9`, `tapi32`, `netapi32`, `shfolder`) so the game runs smoothly, and you can launch it using `RUN_NFS.BAT`.
 
-## 🚀 Próximos Passos na Estrada de Tijolos Amarelos
-1. **Fundir as Duas Metades**: Lincar os comandos `DrawPrimitive` capturados pelo `d3d8.c` com a Engine de rastreio de polígonos e Bresenham do `cube3d.asm`.
-2. **Cubo 3D Giratório**: Substituir a tela preta e o "X" de teste pelo primeiro triângulo geométrico projetado e rotacionado pela nossa própria matemática 3D no DOS.
-3. **Boot Loader Final**: Unificar tudo em um `START.BAT` (ou interface dedicada) onde as Splashes Screens (como a da Rockstar North) carregam suavemente direto da linha de comando do MS-DOS 7.10.
+## 🚀 Next Steps on the Yellow Brick Road
+1. **Merge the Two Halves**: Link the `DrawPrimitive` commands captured by `d3d8.c` with the polygon tracing and Bresenham Engine of `cube3d.asm`.
+2. **Spinning 3D Cube**: Replace the black screen and the test "X" with the first geometric triangle projected and rotated by our own 3D math in DOS.
+3. **Final Boot Loader**: Unify everything into a `START.BAT` (or dedicated interface) where Splash Screens (like Rockstar North's) load smoothly straight from the MS-DOS 7.10 command line.
 
-## 📸 Demonstrações Visuais (Screenshots)
+## 📸 Visual Demonstrations (Screenshots)
 
 
 <img width="791" height="627" alt="image" src="https://github.com/user-attachments/assets/66a50cfc-d0b7-4b4d-95b1-6f1ceb62644c" />
 
-Sensacional! O screenshot mostra que tudo funcionou com perfeição matemática. A linha vermelha corta exatamente o eixo Y=300, a verde o eixo X=400, e o quadrado azul está perfeitamente centralizado.
+Sensational! The screenshot shows that everything worked with mathematical perfection. The red line cuts exactly across the Y=300 axis, the green one across the X=400 axis, and the blue square is perfectly centered.
 
-Nós acabamos de construir a fundação absoluta de uma Engine Gráfica. Qualquer jogo 3D (desde o Doom até o GTA Vice City) baseia-se exatamente nessa premissa: escrever cores em um buffer de memória linear de forma extremamente rápida.
+We have just built the absolute foundation of a Graphics Engine. Any 3D game (from Doom to GTA Vice City) relies on exactly this premise: writing colors into a linear memory buffer extremely fast.
 
 
 <img width="932" height="270" alt="image" src="https://github.com/user-attachments/assets/0eb3eeb2-1b9f-4195-8ec5-75e17112be46" />
@@ -79,5 +79,5 @@ Nós acabamos de construir a fundação absoluta de uma Engine Gráfica. Qualque
 <img width="1332" height="883" alt="image" src="https://github.com/user-attachments/assets/4de8d5f7-0885-4a66-b5f7-8fd62279715b" />
 
 ---
-*HX-DOS-2: Onde os jogos clássicos do Windows vão para renascer nas raízes da computação!*
+*HX-DOS-2: Where classic Windows games go to be reborn in the roots of computing!*
 
