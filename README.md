@@ -1,6 +1,6 @@
-# Projeto MS-DOS 8 🚀 (Codinome: DOS-WINE)
+# Projeto HX-DOS-2 🚀
 
-Bem-vindo ao projeto **MS-DOS 8**! Este repositório é o núcleo de uma ideia insanamente ambiciosa: **construir um Sistema Operacional bootável baseado em DOS, capaz de rodar jogos complexos nativos de Windows XP (como *Grand Theft Auto: Vice City*), utilizando aceleração 3D por Software e Wrappers DirectX, direto pelo terminal!**
+Bem-vindo ao projeto **HX-DOS-2**! Este repositório é o núcleo de uma ideia insanamente ambiciosa: **construir um Sistema Operacional bootável baseado em DOS, capaz de rodar jogos complexos nativos de Windows XP (como *Grand Theft Auto: Vice City* ou *Need for Speed*), utilizando aceleração 3D por Software e Wrappers de API nativos, direto pelo terminal!**
 
 Esqueça o Windows bugado, drivers piratas e chaves de registro. Aqui nós controlamos o hardware!
 
@@ -14,8 +14,8 @@ Por que o MS-DOS 7.10?
 - Suporte nativo a **LFN (Long File Names)**, impedindo que as pastas dos jogos de Windows se corrompam.
 - Gerenciamento agressivo de memória em Modo Real/Irreal (Unreal Mode).
 
-## 🎯 O Que é o "DOS-WINE"?
-Assim como a Steam tem o Proton e o Linux tem o Wine ("Wine Is Not an Emulator"), o projeto **MS-DOS 8** atua fornecendo as suas próprias DLLs falsas (Wrappers) para emular as APIs do Windows 2000/XP.
+## 🎯 O Que é o "HX-DOS-2"?
+O projeto **HX-DOS-2** atua fornecendo suas próprias DLLs (Wrappers) e extensões de sistema (Totalmente originais, sem depender de emuladores) para implementar e fornecer suporte às APIs do Windows 2000/XP diretamente no MS-DOS puro.
 
 Quando um jogo pede para renderizar um modelo 3D, ele chama a `d3d8.dll` achando que está falando com a Microsoft. A nossa `d3d8.dll` intercepta os polígonos, converte a matemática e envia as requisições de renderização direto para a nossa **Engine VESA Assembly de Baixo Nível (cube3d.asm)**!
 
@@ -36,7 +36,7 @@ Quando um jogo pede para renderizar um modelo 3D, ele chama a `d3d8.dll` achando
     - **Segredo de Ouro**: A segmentação de memória linear (4GB Limit) é injetada no registrador `FS`, em vez do tradicional `ES`. Isso blinda a Engine contra crashes da BIOS e do DOSBox (`Illegal descriptor type 10`), garantindo estabilidade infinita.
     - Acesso direto ao Linear Frame Buffer (LFB) da placa de vídeo via VESA BIOS Extension (Modo 0x114 LFB).
 
-## 🛠️ Como Compilar o "DOS-WINE"
+## 🛠️ Como Compilar o "HX-DOS-2"
 
 Nossas DLLs são compiladas utilizando o compilador C Win32 (MinGW) para manter compatibilidade absoluta de ABI (Application Binary Interface) com os jogos originais.
 
@@ -63,7 +63,7 @@ Isso vai gerar e organizar as DLLs essenciais (`d3d9`, `tapi32`, `netapi32`, `sh
 2. **Cubo 3D Giratório**: Substituir a tela preta e o "X" de teste pelo primeiro triângulo geométrico projetado e rotacionado pela nossa própria matemática 3D no DOS.
 3. **Boot Loader Final**: Unificar tudo em um `START.BAT` (ou interface dedicada) onde as Splashes Screens (como a da Rockstar North) carregam suavemente direto da linha de comando do MS-DOS 7.10.
 
-# Projeto HX DOS 2 🚀 MS-DOS 7.10
+## 📸 Demonstrações Visuais (Screenshots)
 
 
 <img width="791" height="627" alt="image" src="https://github.com/user-attachments/assets/66a50cfc-d0b7-4b4d-95b1-6f1ceb62644c" />
@@ -76,10 +76,8 @@ Nós acabamos de construir a fundação absoluta de uma Engine Gráfica. Qualque
 <img width="932" height="270" alt="image" src="https://github.com/user-attachments/assets/0eb3eeb2-1b9f-4195-8ec5-75e17112be46" />
 
 
-Bem-vindo ao projeto **HX DOS 2**! Este repositório nasceu de uma ideia insanamente ambiciosa: **executar jogos complexos nativos de Windows (Win32), como *Grand Theft Auto: Vice City*, puramente no MS-DOS!**
-
 <img width="1332" height="883" alt="image" src="https://github.com/user-attachments/assets/4de8d5f7-0885-4a66-b5f7-8fd62279715b" />
 
 ---
-*MS-DOS 8: Onde os jogos clássicos do Windows vão para renascer nas raízes da computação!*
+*HX-DOS-2: Onde os jogos clássicos do Windows vão para renascer nas raízes da computação!*
 
